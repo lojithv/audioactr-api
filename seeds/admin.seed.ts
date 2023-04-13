@@ -9,7 +9,7 @@ export const addAdmin = () => {
         lastname: "Admin",
         password: "test1234",
         email: "audioactr@mail.com",
-        userType: r?._id,
+        userRole: r?._id,
       };
 
       const admin = new User(adminData);

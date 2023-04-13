@@ -14,7 +14,7 @@ const userSchema = new Schema({
   lastname: String,
   email: String,
   password: String,
-  userRole: { type: Schema.Types.ObjectId, ref: "UserRole" },
+  userRole: { type: Schema.Types.ObjectId, ref: "Role", required:true },
   createdDate: { type: Date, default: Date.now },
 });
 

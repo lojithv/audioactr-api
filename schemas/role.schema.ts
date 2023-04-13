@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-export interface IUserRole{
+export interface IRole{
   role:string;
 }
 
@@ -10,5 +10,5 @@ const userRoleSchema = new Schema({
 });
 
 // compile our model
-const UserRole = mongoose.model<IUserRole>("UserRole", userRoleSchema);
+const UserRole = mongoose.model<IRole>("Role", userRoleSchema);
 export default UserRole;
