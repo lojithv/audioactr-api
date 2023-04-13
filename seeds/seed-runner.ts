@@ -1,20 +1,15 @@
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import { addUserRoles } from "./user-role.seed";
 import { addAdmin } from "./admin.seed";
-
-async function main() {
-  console.log("seed runner");
-  await mongoose.connect("mongodb://127.0.0.1:27017/audioactr");
-}
+import { connectDB } from "../helpers/db-connect.helper";
 
 async function runSeeds() {
   console.log("Run Seeds");
-  //   addUserRoles()
+    // addUserRoles()
   addAdmin();
 }
 
-main()
+connectDB()
   .then(() => {
     console.log("Connected to MongoDb");
     runSeeds();

@@ -4,6 +4,7 @@ import { routesRoot } from "./routes/root.routes";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import { connectDB } from "./helpers/db-connect.helper";
 
 dotenv.config();
 
@@ -23,6 +24,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 routesRoot(app);
+
+connectDB()
+  .then(() => {
+    console.log("Connected to MongoDb");
+  })
+  .catch((err) => console.log(err));
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
