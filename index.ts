@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { connectDB } from "./helpers/db-connect.helper";
+import { registerSchemas } from "./schemas/register-schemas";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ routesRoot(app);
 connectDB()
   .then(() => {
     console.log("Connected to MongoDb");
+    registerSchemas()
   })
   .catch((err) => console.log(err));
 
