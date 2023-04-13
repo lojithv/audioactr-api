@@ -14,7 +14,7 @@ export namespace AuthController {
   export const signin = (req: Request, res: Response) => {
     console.log("test");
     const authData: LoginData = req.body;
-    User.findOne({ email: authData.email },{},{populate:["userRole"]})
+    User.findOne({ email: authData.email }, {}, { populate: ["userRole"] })
       .then((user) => {
         console.log("User", user);
         if (user) {
@@ -33,3 +33,5 @@ export namespace AuthController {
       });
   };
 }
+
+
