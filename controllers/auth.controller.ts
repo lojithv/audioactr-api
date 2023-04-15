@@ -2,13 +2,40 @@ import { Request, Response } from "express";
 import { UserModel } from "../models/user.model";
 import { LoginData } from "../models/login-data.model";
 import User from "../schemas/user.schema";
+import UserRole from "../schemas/role.schema";
 
 export namespace AuthController {
   export const signup = (req: Request, res: Response) => {
     console.log(req.body);
-    const userData: UserModel = req.body?.userData;
-    console.log("UserData", userData);
-    res.send({ userData });
+
+    UserRole.findOne({ role: "USER" })
+      .then((r) => {
+        if (r) {
+          const userData: UserModel = {
+            ...req.body,
+            userRole: r?._id,
+          };
+
+          console.log("UserData", userData);
+
+          const user = new User(userData);
+          user
+            .save()
+            .then((doc) => {
+              console.log(doc);
+              res.send(doc).status(200)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          res.send("Cannot create user").status(400)
+        }
+      })
+      .catch((err) => {
+        console.log("Cannot find admin role id");
+        res.send("Cannot create user").status(400)
+      });
   };
 
   export const signin = (req: Request, res: Response) => {
@@ -33,5 +60,3 @@ export namespace AuthController {
       });
   };
 }
-
-
