@@ -7,14 +7,17 @@ import UserRole from "../schemas/role.schema";
 export namespace AuthController {
   export const signup = (req: Request, res: Response) => {
     console.log(req.body);
+    const authData = req.body
+    if(!(authData.email && authData.password && authData.firstname && authData.lastname)){
+      return res.send("Enter required Data").status(400)
+    }
 
     UserRole.findOne({ role: "USER" })
       .then((r) => {
         if (r) {
           const userData: UserModel = {
             ...req.body,
-            userRole: r?._id,
-          };
+            userRole: r?._id,};
 
           console.log("UserData", userData);
 

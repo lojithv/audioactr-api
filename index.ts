@@ -14,7 +14,7 @@ const port = process.env.PORT;
 
 // enabling CORS for some specific origins only.
 let corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000","http://localhost:3006"],
 };
 
 app.use(cors(corsOptions));
