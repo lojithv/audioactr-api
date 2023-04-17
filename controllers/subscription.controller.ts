@@ -7,12 +7,27 @@ export namespace SubscriptionController {
     res.send("Express + TypeScript Server 123456");
   };
 
+  export const cancelSubscription = (req: Request, res: Response) => {
+    console.log("test")
+    res.send("Express + TypeScript Server 123456");
+  };
+
   export const getSubscriptionStatusByUserId = (req: Request, res: Response) => {
     console.log("test")
     res.send("Express + TypeScript Server 123456");
   };
 
   export const getSubscriptions = (req: Request, res: Response) => {
+    console.log("test")
+    res.send("Express + TypeScript Server 123456");
+  };
+
+  export const changeSubscriptionStatus = (req: Request, res: Response) => {
+    console.log("test")
+    res.send("Express + TypeScript Server 123456");
+  };
+
+  export const removeSubscription = (req: Request, res: Response) => {
     console.log("test")
     res.send("Express + TypeScript Server 123456");
   };
