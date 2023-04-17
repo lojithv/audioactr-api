@@ -10,14 +10,14 @@ export interface ISubscriptionPlan {
   planName: string;
   planDetails: string;
   price: number;
-  planType: PlanType;
+  planType: string;
 }
 
 const subscriptionPlanSchema = new Schema({
   planName: String,
   planDetails: String,
   price: Number,
-  planType: { type: PlanType, default: PlanType.PAID },
+  planType: { type: String, default: PlanType.PAID },
 });
 
 // compile our model
