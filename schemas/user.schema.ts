@@ -2,11 +2,12 @@ import mongoose, { Types } from "mongoose";
 const { Schema } = mongoose;
 
 export interface IUser extends mongoose.Document {
- firstname:string;
- lastname:string;
- email:string;
- password:string;
- userRole:Types.ObjectId
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  paidUser: boolean;
+  userRole: Types.ObjectId;
 }
 
 const userSchema = new Schema({
@@ -14,7 +15,8 @@ const userSchema = new Schema({
   lastname: String,
   email: String,
   password: String,
-  userRole: { type: Schema.Types.ObjectId, ref: "Role", required:true },
+  paidUser: { type: Boolean, default: false },
+  userRole: { type: Schema.Types.ObjectId, ref: "Role", required: true },
   createdDate: { type: Date, default: Date.now },
 });
 
