@@ -7,9 +7,16 @@ import UserRole from "../schemas/role.schema";
 export namespace AuthController {
   export const signup = (req: Request, res: Response) => {
     console.log(req.body);
-    const authData = req.body
-    if(!(authData.email && authData.password && authData.firstname && authData.lastname)){
-      return res.send("Enter required Data").status(400)
+    const authData = req.body;
+    if (
+      !(
+        authData.email &&
+        authData.password &&
+        authData.firstname &&
+        authData.lastname
+      )
+    ) {
+      return res.send("Enter required Data").status(400);
     }
 
     UserRole.findOne({ role: "USER" })
@@ -17,7 +24,8 @@ export namespace AuthController {
         if (r) {
           const userData: UserModel = {
             ...req.body,
-            userRole: r?._id,};
+            userRole: r?._id,
+          };
 
           console.log("UserData", userData);
 
@@ -26,18 +34,18 @@ export namespace AuthController {
             .save()
             .then((doc) => {
               console.log(doc);
-              res.send(doc).status(200)
+              res.send(doc).status(200);
             })
             .catch((err) => {
               console.log(err);
             });
         } else {
-          res.send("Cannot create user").status(400)
+          res.send("Cannot create user").status(400);
         }
       })
       .catch((err) => {
         console.log("Cannot find admin role id");
-        res.send("Cannot create user").status(400)
+        res.send("Cannot create user").status(400);
       });
   };
 
@@ -61,5 +69,24 @@ export namespace AuthController {
         console.log(err);
         res.send(err);
       });
+  };
+
+  export const getSelf = (req: Request, res: Response) => {
+    const { user } = req.body;
+    if (user) {
+      User.findOne({ email: user.email }, {}, { populate: ["userRole"] })
+        .then((user) => {
+          console.log("User", user);
+          if (user) {
+            res.send(user);
+          } else {
+            res.send("User not found!");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          res.send(err);
+        });
+    }
   };
 }

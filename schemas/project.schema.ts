@@ -2,14 +2,14 @@ import mongoose, { Mixed, Types } from "mongoose";
 const { Schema } = mongoose;
 
 export interface IProject {
-  title: string;
   userId: Types.ObjectId;
+  projectId:string;
   state: Mixed;
 }
 
 const projectSchema = new Schema({
-  title: String,
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  projectId:String,
   state: { type: Schema.Types.Mixed, required: true },
 });
 
